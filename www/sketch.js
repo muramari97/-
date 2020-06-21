@@ -11,7 +11,7 @@ function setup() {
   balloon = loadImage('sozai/balloon.png');
   haretsu = loadImage('sozai/haretsu.png');
   for(let i=0;i<10;i++){
-    x[i] = random(width);
+    x[i] = random(100,width-100);
   }
   y = height;
 }
@@ -32,7 +32,6 @@ function draw() {
       if (mouseIsPressed) {
         image(haretsu,x[count],y,balsize,balsize);
         bombBal = true;
-        count += 1;
       }else{
         image(balloon,x[count],y,balsize,balsize);
       }
@@ -40,11 +39,23 @@ function draw() {
       image(balloon,x[count],y,balsize,balsize);
     }
   }
-  
-  //10回繰り返す
-  if(bombBal && count < 10){
+  //もし風船が割れてなかったら
+  if(!bombBal && y < 0){
+    x[count] = random(100,300);
     y = height;
-    bombBal = false;
   }
-
+  //割れたとき
+  if(bombBal){
+    count += 1;
+    //10回繰り返す
+    if(count < 10){
+      y = height;
+      bombBal = false;
+    }else{
+      background(255);
+      textSize(50);
+      text('Clear!',100,300);
+    }
+  }
+  
 }
