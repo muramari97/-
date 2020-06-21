@@ -1,15 +1,19 @@
-// This is a JavaScript file
-var sample;
-
-function preload() {
-  sample = loadSound('assets/audio.mp3');
-}
+let balloon; // 風船
+let haretsu; //破裂した風船
+let x;
+let y;
 
 function setup() {
   createCanvas(windowWidth,windowHeight);
-  sample.loop();
+  balloon = loadImage('sozai/balloon.png');
+  haretsu = loadImage('sozai/haretsu.png');
+  x = random(width/5);
+  y = height;
 }
 
 function draw() {
-  background(200);
+  background(255);
+  x = random(-20,20);
+  y -= 3;
+  image(balloon,x,y,100,100);
 }
